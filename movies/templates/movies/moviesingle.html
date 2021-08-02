@@ -1,0 +1,333 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+
+
+     {% block title %} {{ movie.title }} смотреть онлайн | аниме онлайн {{ movie.title }}{% endblock title %}
+        {% block meta %} {{ movie.title }} смотреть онлайн аниме , {{ movie.name }} все серии все сезоны аниме {{movie.year}} года, новые аниме{% endblock meta %}
+
+        {% block description %}Смотреть онлайн аниме {{ movie.title }},{{ movie.name }}, {{ movie.search }} - {{ movie.description|slice:":255"|safe }}{% endblock description %}
+ 
+            {% block container %}
+                <div class="container-fluid py-md-3">
+            {% endblock container %}
+
+{% block movie %}
+
+<div class="left-ads-display col-lg-8">
+                    <div class="row">
+                        <div class="desc1-left col-md-6">
+                            <center>
+                                <img src="{{ movie.poster.url }}" class="img-fluid" alt="">
+                            </center>
+
+                        </div>
+
+                        <div class="desc1-right col-md-6 pl-lg-4">
+                            <h3 class="editContent edit_name" style="outline: none; cursor: inherit;">
+                                 {{ movie.title|capfirst }}
+                                </h3>
+                            <h5 class="editContent">
+                                 {{ movie.name }}
+                            </h5>
+
+                            <ul>
+                                <li style="list-style: none"><span><b>Просмотров: </b> {{ movie.views }}</span></li>
+
+
+                                <li style="list-style: none">
+                                <li style="list-style: none"><span><b>Год: </b> {{ movie.year }}</span></li>
+
+
+                                <li style="list-style: none">
+                                    <span><b>Режиссер: </b>
+                                        {% for director in movie.directors.all %}
+                                             {{ director.name }}
+                                        {% endfor %}
+                                    </span></li>
+
+                                <li style="list-style: none"><span><b>Жанр: </b>
+                                    {% for genre in movie.genres.all %}
+                                    <a href="/genre/?genre={{genre.id}}">
+                                         {{ genre.name }}
+                                        </a>
+                                    {% endfor %}
+                                </span>
+                                </li>
+
+
+
+                                <li style="list-style: none">
+                                        <b>Рейтинг:</b>
+                                        <div class="wpac-rating" data-wpac-chan="{{ movie.id }}" style="width:80%">
+
+                                        </div>
+
+<!--             Рейтинг для фильмов созданный мной. Использовать если рейтинг выше перестанет работать-->
+
+<!--                                <li style="list-style: none">-->
+
+<!--                                    <div class="star_icon">-->
+
+<!--                                        {% if request.user.is_authenticated %}-->
+<!--                                        <span><b>Рейтинг: </b><a class="star_a" onclick="myFunction()">-->
+<!--                                            <p class="star fas fa-star"></p>-->
+<!--                                        <span style="font-weight:bold;">{{ movie.get_rating }}</span> / <span style="font-weight:bold;">{{movie.total_rating}}</span>-->
+<!--                                            </a>-->
+<!--                                        {% else %}-->
+<!--                                        <p class="star2 fas fa-star"></p>-->
+<!--                                        {{ movie.get_rating }}-->
+<!--                                        {% endif %}-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                                                    {% if request.user.is_authenticated %}-->
+
+<!--                                    <li style="list-style:none; display: none;" id="rating-form">-->
+<!--                                <form action="{% url 'rating_form' %}" method="POST" class="rating">-->
+<!--                                          {% csrf_token %}-->
+<!--                                     <div class="rating-form" name="rating-form">-->
+<!--                                        <input type="radio" id="star1" class="rate" name="vote" value="10" /><label for="star1" title="Круто"></label>-->
+<!--                                        <input type="radio" id="star2" class="rate" name="vote" value="9" /><label for="star2" title="Отлично"></label>-->
+<!--                                        <input type="radio" id="star3" class="rate" name="vote" value="8" /><label for="star3" title="Очень хорошо"></label>-->
+<!--                                        <input type="radio" id="star4" class="rate" name="vote" value="7" /><label for="star4" title="хорошо"></label>-->
+<!--                                        <input type="radio" id="star5" class="rate" name="vote" value="6" /><label for="star5" title="Средне"></label>-->
+<!--                                        <input type="radio" id="star6" class="rate" name="vote" value="5" /><label for="star6" title="Как то не очень"></label>-->
+<!--                                        <input type="radio" id="star7" class="rate" name="vote" value="4" /><label for="star7" title="Фигня"></label>-->
+<!--                                        <input type="radio" id="star8" class="rate" name="vote" value="3" /><label for="star8" title="Плохо"></label>-->
+<!--                                        <input type="radio" id="star9" class="rate" name="vote" value="2" /><label for="star9" title="Ужас"></label>-->
+<!--                                        <input type="radio" id="star10" class="rate" name="vote" value="1" /><label for="star10" title="Кошмар"></label>-->
+
+<!--                                     </div>-->
+
+<!--                                          <button name="post_id" value="{{ movie.id }}" class="btn btn-success send_btn rating-button" type="submit">отправить</button>-->
+
+<!--                                </form>-->
+
+<!--                                        <script>-->
+<!--                                        function myFunction() {-->
+<!--                                          document.getElementById("rating-form").style.display = "block";-->
+<!--                                        }-->
+<!--                                        </script>-->
+<!--                                </li>-->
+
+<!--                                                            {% else %}-->
+<!--                                                            {% endif %}-->
+
+
+
+                                 <li style="list-style: none">
+                                {% if request.user.is_authenticated %}
+                                <li style="list-style: none"><span><b>Избранное:</b></i>
+
+                                {% if is_favorite %}
+                                <a href="{% url 'favourite' id=movie.id %}">
+                                    <i class="far fa-bookmark" style="padding-left: 10px; color: #ff4c4c;"></i>
+                                </a>
+                                {% else %}
+                                <a href="{% url 'favourite' id=movie.id %}">
+                                    <i class="far fa-bookmark" style="padding-left: 10px;"></i>
+                                </a>
+                                {% endif %}
+                                </span></li>
+
+
+                                </ul>
+                                {%endif%}
+ 
+
+
+                        </div>
+                    </div>
+
+                 <div class="like_form col-lg-6 col-md-6" style="display:flex; padding:5px 0;">
+                         <div class="like_button col-2 col-lg-2 col-md-2">
+                                {% if request.user.is_authenticated %}
+                                <form action="{% url 'like_post' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if is_liked %}
+                                    <button type="submit" name="post_id" value="{{ movie.id }}" class="btn btn-danger" style="background:none;outline:none;border:none;">
+                                        <i class="fas fa-heart" style="color:#ff4c4c;font-size:25px;"></i></button>
+                                    {% else %}
+
+                                    <button type="submit" name="post_id" value="{{ movie.id }}" class="btn btn-primary" style="background:none;outline:none;border:none;">
+                                        <i class="far fa-heart" style="color:rgba(0, 123, 255, 0.7);font-size:25px;"></i></button>
+                                    {% endif %}
+                                </form>
+                                {% else %}
+                                    <button type="submit" name="post_id" value="{{ movie.id }}" class="btn btn-primary" style="background:none;outline:none;border:none;" disabled>
+                                        <i class="far fa-heart" style="color:rgba(0, 123, 255, 0.7);font-size:25px;float:left;"></i></button>
+                                {% endif %}
+                        </div>
+                     <div class="like_count col-lg-10 col-md-10" style="padding-top:5px;">
+                        <p>Понравилось: <span style="color:#212529;font-weight:bold;">{{total_likes}}</span></p>
+                     </div>
+                            </div>
+                    <div class="row sub-para-w3layouts mt-5">
+
+                        <!--реклама-->
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                        <script data-ad-client="ca-pub-3956102624069790" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+                        <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+                            Описание {{ movie.title | safe }}</h3>
+
+
+                        <p class="center_img">
+
+                            {% for image in movie.movieshots_set.all %}
+                                <img src=" {{ image.image.url }}" class="img-fluid col-md-3 col-lg-4" style="width:32%;height:90%;object-fit:cover;">
+                            {% endfor %}
+
+                        </p>
+
+
+                        <p class="editContent movie_descr" style="outline: none; cursor: inherit;">
+                            {{ movie.description|safe }}
+                        </p>
+
+
+                    </div>
+    <hr>
+    <br><br><br>
+    <div class="player-main">
+        {% for anime in movie.serias_set.all %}
+<!--        <div id="yohoho" data-kinopoisk="{{anime.description}}" data-tmdb="{{anime.imdb}}"></div>-->
+<!--        <script src="//yohoho.cc/yo.js"></script>-->
+        <div id="yohoho"
+     data-kinopoisk="{{anime.description}}"
+     data-loading="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiBub25lOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyM3B4IiBoZWlnaHQ9IjIyM3B4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8ZyB0cmFuc2Zvcm09InJvdGF0ZSgwIDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTEuMDk3NTYwOTc1NjA5NzU2cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiPjwvYW5pbWF0ZT4KICA8L3JlY3Q+CjwvZz48ZyB0cmFuc2Zvcm09InJvdGF0ZSgzNiA1MCA1MCkiPgogIDxyZWN0IHg9IjQ3IiB5PSIxNy41IiByeD0iMyIgcnk9IjYuNSIgd2lkdGg9IjYiIGhlaWdodD0iMTMiIGZpbGw9IiM4NWEyYjYiPgogICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgdmFsdWVzPSIxOzAiIGtleVRpbWVzPSIwOzEiIGR1cj0iMS4yMTk1MTIxOTUxMjE5NTEycyIgYmVnaW49Ii0wLjk3NTYwOTc1NjA5NzU2MDhzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlPgogIDwvcmVjdD4KPC9nPjxnIHRyYW5zZm9ybT0icm90YXRlKDcyIDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuODUzNjU4NTM2NTg1MzY1N3MiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMTA4IDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuNzMxNzA3MzE3MDczMTcwNnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMTQ0IDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuNjA5NzU2MDk3NTYwOTc1NXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuNDg3ODA0ODc4MDQ4NzgwNHMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMjE2IDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuMzY1ODUzNjU4NTM2NTg1M3MiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMjUyIDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuMjQzOTAyNDM5MDI0MzkwMnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMjg4IDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iLTAuMTIxOTUxMjE5NTEyMTk1MXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMzI0IDUwIDUwKSI+CiAgPHJlY3QgeD0iNDciIHk9IjE3LjUiIHJ4PSIzIiByeT0iNi41IiB3aWR0aD0iNiIgaGVpZ2h0PSIxMyIgZmlsbD0iIzg1YTJiNiI+CiAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxLjIxOTUxMjE5NTEyMTk1MTJzIiBiZWdpbj0iMHMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgPC9yZWN0Pgo8L2c+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg=="
+     
+     {% if anime.dataplayer %}
+        data-player="{{anime.dataplayer}}">
+     {% else %}
+        data-player="kodik, videocdn, collaps, hdvb, bazon, ustore">
+     {% endif %}
+    </div>
+</div>
+            <script async src="//yohoho.cc/yo.js"></script>
+         {% endfor %}
+
+    </div>
+
+    <br><br>
+
+        </div>
+                    <hr>
+                
+
+                    <div class="col-lg-8 row rev_center">
+
+
+                        <div class="single-form-left">
+
+                            <!-- contact form grid -->
+
+                            <div class="contact-single" style="padding-bottom: 60px;">
+                                <h3 class="editContent com-form" style="outline: none; cursor: inherit;">
+                                    <span class="sub-tittle editContent"
+                                          style="outline: none; cursor: inherit;">Комментариев: {{ movie.comment_set.count }}</span>Оставить отзыв</h3>
+                                <br><br><br>
+                                <form method="post" class="mt-4 com-form" id="formReview" action=".">
+                                    {% csrf_token %}
+                                <input type="hidden" name="comment_id" id="contactparent" value="{{ comment.id }}">
+
+                                    {{ form.as_p }}
+                                    {% if request.user.is_authenticated %}
+                                    <input type="submit" value="Отправить" class="mt-3 btn btn-success btn-block py-3">
+                                    {% else %}
+                                    <input type="submit" value="Отправить" class="mt-3 btn btn-success btn-block py-3" disabled>
+                                    {% endif %}
+                                </form>
+
+                            </div>
+
+
+
+                            <!--  //contact form grid ends here -->
+                        </div>
+
+
+                    {% for comment in movie.get_comment %}
+
+                        <div class="media py-5 rew-field">
+
+                            <div class="comment_avatar">
+                            <img src="{{comment.user.profile.avatar.url }}" class="mr-3 img_com" alt="image"
+                                 style="outline: none; cursor: inherit;">
+                                </div>
+                            <div class="comm-content">
+                                <div class="nick-time" style="width:100%;display:flex;">
+
+                                <h5 class="mt-0 editContent"
+                                    style="outline: none; cursor: inherit; width:30%;">{{ comment.user|capfirst }}</h5>
+
+                                <p class='d-none d-lg-block' style="float:right;width:70%;text-align:right;">{{comment.time}}</p>
+
+                                 </div>
+                                <p class="mt-2 editContent word-space" style="outline: none; cursor: inherit; word-break: break-all; font-size: 16px">
+                                        {{ comment.content }}
+                                </p>
+                                {% if request.user.is_authenticated %}
+                                <a href="#formReview" onclick="addReview('{{comment.user}}', '{{comment.id}}')">Ответить</a>
+<!--                                <button type="button" name="button" class="reply-btn btn btn-success btn-sm"">Ответить</button>-->
+                                {% endif %}
+
+
+                     <!-- Ответы на комментарии начало-->
+
+
+                                <div class="replied-comments container my-2" id="replied-comments">
+                                    {% for reply in comment.replies.all %}
+
+                                        <div class="media-2 mt-5 editContent"-->
+                                            <div class="comment_avatar2">
+                                            <img src="{{reply.user.profile.avatar.url }}" class="mr-3 img_com" alt="image"
+                                            style="outline: none; cursor: inherit;">
+                                        </div>
+                                          <div class="comm-content2">
+
+                                              <div class="nick-time" style="width:100%;display:flex;">
+
+                                              <h5 class="mt-0 editContent" style="outline: none; cursor: inherit;">{{ reply.user|capfirst }}</h5>
+
+                                              <p class='d-none d-lg-block' style="float:right;width:100%;text-align:right;">{{comment.time}}</p>
+
+                                              </div>
+                                            <p class="mt-2 editContent word-space" style="outline: none; cursor: inherit; word-break: break-all;">
+
+                                                      {{ reply.content }}
+                                             </p>
+
+                                           </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                                <hr>
+
+                             <!-- Ответы на комментарии конец-->
+
+                            </div>
+                            </div>
+                     {% endfor %}
+
+
+
+                    </div>
+
+
+                </div>
+</div>
+                     <script>
+                          function addReview(name, id) {
+                              document.getElementById("contactparent").value = id;
+                              document.getElementById("id_content").innerText = `${name}, `
+                           }
+                     </script>
+
+
+
+
+{% endblock movie %}

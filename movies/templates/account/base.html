@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+{% load movie_tags %}
+<html lang="ru">
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="{% block meta %} {% endblock meta %}">
+
+    {% block vk %}  {% endblock vk %}
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Bootstrap-Core-CSS -->
+    <!-- DARK THEME -->
+    <link rel="stylesheet" type="text/css" media="all"  class="style">
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <!--// Style-CSS -->
+        <script>
+        const head = document.querySelector('head .style')
+        if(localStorage.getItem('dark-theme') && localStorage.getItem('dark-theme') === 'true'){
+                head.setAttribute('href', `{% static 'css/dark.css' %}`)
+                dark = true
+        } else {
+            head.setAttribute('href', ``)
+        }
+    </script>
+    <!-- font-awesome-icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+  <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+    <!-- //Fonts -->
+
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <script src="{% static 'script/jquery.min.js' %}"></script>
+    <script src="{% static 'script/owl.carousel.min.js' %}"></script>
+
+</head>
+
+
+<body>
+
+
+<div id="page" class="page"><!-- mian-content -->
+
+    <div class="main-banner bg bg1" id="home">
+            <!-- header -->
+            <header class="header">
+                <div class="container-fluid px-lg-5">
+                    <!-- nav -->
+                    <nav class="py-4">
+                        <div id="logo">
+                            <h1> <a href="/" class="editContent" style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family: &quot;Source Sans Pro&quot;, sans-serif;">Анимезис</a></h1>
+                        </div>
+
+                        <label for="drop" class="toggle">Меню</label>
+                        <input type="checkbox" id="drop">
+                        <ul class="menu mt-2">
+                            <li class="active"><a href="/">Главная</a></li>
+
+                            <li>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'profile' %}" style="color: #ff4c4c; font-weight: bold; font-size: 15px;">
+                                        <span>{{ user.username }}</span>
+                                    </a>
+                                <a href="{% url 'account_logout' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Выход
+                                </a>
+                                {% else %}
+                                <a href="{% url 'account_login' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Вход
+                                </a>
+                                <a href="{% url 'account_signup' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Регистрация
+                                </a>
+                                {% endif %}
+
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- //nav -->
+                </div>
+            </header>
+            <!-- //header -->
+            <!--/banner-->
+            <div class="banner-info">
+
+
+                <div class="ban-buttons">
+
+
+                </div>
+            </div>
+            <!--// banner-inner -->
+
+
+
+
+</div>
+
+
+</div>
+
+
+<ul class="breadcrumb editContent">
+            <li class="breadcrumb-item">
+                <a href="/" class="editContent">Главная</a>
+            </li>
+
+
+</ul>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    {% block footer%}
+
+    {% endblock footer %}
+</div>
+
+
+
+
+
+</body>
+</html>
+

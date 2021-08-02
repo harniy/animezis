@@ -1,0 +1,14 @@
+<div class="left-side my-4 d-none d-sm-none d-md-none d-lg-block">
+
+                            <h3 class="sear-head editContent" >Жанры</h3>
+                            <ul class="w3layouts-box-list">
+                         {% for genre in genre_list %}
+                                <li class="editContent" >
+                                    <a href="/genre/?genre={{genre.id}}" type="checkbox" class="checked" name="genre" value="{{ genre.name }}">
+                                    <span class="span editContent" >{{ genre.name }}</span></a>
+                                </li>
+                          {% endfor %}
+                            </ul>
+                        </div>
+
+

@@ -1,0 +1,56 @@
+{% extends 'account/base.html' %}
+{% load movie_tags %}
+
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                    <div class="last_update_min" style="display: flex;">
+                <div class="col-lg-3">
+                    {% get_genre %}
+                </div>
+
+                    </div>
+
+
+                <div class="col-md-12 col-lg-9">
+                      {% for anime in movie_list %}
+                    <div class="last_update_anime" style="display:block;">
+                        <div class="last_update_time" style="width:100%;">
+                            <p>{{anime.time}}</p>
+                        </div>
+                        <div class="last_box"style="display:flex;">
+                                <div class="last_anime_pposter" style="display:inline-block;">
+                                    <a href="../{{ anime.url }}">
+                                         <img src="{{ anime.poster.url }}" alt="{{anime.title}}" >
+                                    </a>
+                                </div>
+                                    <div class="last_content" style="padding-left:1em;">
+                                        <div class="last_anime_title">
+                                            <a href="../{{ anime.url }}">
+                                                <p style="color:#007bff">{{anime.title}}</p>
+                                            </a>
+                                        </div>
+                                        <div class="last_apdute_content">
+                                            <p >{{anime.description|slice:":255"|safe}}</p>
+                                        </div>
+                               </div>
+                         </div>
+                    </div>
+                        {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+
+
+                                <div class="pagin mt-4 text-right">
+
+                                 {% include 'include/pagination.html' %}
+
+                                </div>
+
+    {% endblock content %}
+    {% block footer%}
+        {% include 'include/footer.html' %}
+    {% endblock footer %}

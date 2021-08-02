@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>{% block title %} {% endblock title %} </title>
+    <meta charset="utf-8">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Яндекс-->
+    <meta name="yandex-verification" content="1c2c00e6c5800092" />
+
+    <!--Google-->
+    <meta name="google-site-verification" content="3mpFmwTxzTaisrSWKBEZXB5pvlQuAcGK2GgRC8oex-o" />
+
+
+    <meta name="keywords" content="{% block meta %}{% endblock meta %}" >
+    <meta name="description" content="{% block description %}{% endblock description %}">
+    <meta name="theme-color" content="coral">
+
+    
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Bootstrap-Core-CSS -->
+    <!-- DARK THEME -->
+    <link rel="stylesheet" type="text/css" media="all"  class="style">
+        <!-- DARK THEME -->
+    <link rel="stylesheet" type="text/css" media="all"  class="style">
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+
+    <script async>
+        const head = document.querySelector('head .style')
+        if(localStorage.getItem('dark-theme') && localStorage.getItem('dark-theme') === 'true'){
+                head.setAttribute('href', `{% static 'css/dark.css' %}`)
+        } else {
+            head.setAttribute('href', ``)
+        }
+    </script>
+
+    <!--// Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+  <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+    <!-- //Fonts -->
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+<!--Рейтинг-->
+
+</head>
+
+
+<body>
+
+
+
+
+<div id="page" class="page"><!-- mian-content -->
+ {% include 'include/header.html' %}
+ 
+    {% block content %}
+
+
+    {% endblock content %}
+    <center>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" ></script>
+<!-- Шапка -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3956102624069790"
+     data-ad-slot="3338568493"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </center>  
+ {% include 'include/footer.html' %}
+</div>
+
+<script src="{% static 'script/jquery.min.js' %}" ></script>
+<script src="{% static 'script/owl.carousel.min.js' %}"></script>
+ 
+        <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+            items:1,
+            autoWidth: true,
+            nav: false,
+            loop: true,
+            margin: 5,
+            autoplay: true,
+            autoplayTimeout: 3500,
+            });
+        });
+    </script>
+
+
+
+<!--Рейтинг-->
+<script type="text/javascript" async>
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 26402});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+
+<script type="text/javascript" >
+    let h = document.querySelector('head .style')
+    const btn = document.querySelector('.dark-theme')
+    let dark = false
+
+    btn.addEventListener('click', ()=>{
+        dark = !dark
+        darkTheme(dark)
+    })
+
+    function darkTheme(dark){
+        if(dark === true){
+            h.setAttribute('href', `{% static 'css/dark.css' %}`)
+    } else {
+            h.setAttribute('href', ``)
+    }
+    localStorage.setItem('dark-theme', dark)
+    }
+
+    if(localStorage.getItem('dark-theme') && localStorage.getItem('dark-theme') === 'true'){
+        dark = true
+        } 
+</script>
+
+
+<script type="text/javascript">
+    $('.reply-btn').click(function(){
+    $(this).parent().parent().next('.replied-comments')
+    });
+</script>
+
+
+<script src="https://kit.fontawesome.com/ecb9c61dbc.js" crossorigin="anonymous" async></script>
+
+
+
+<!--Реклама-->
+<!--<script data-ad-client="ca-pub-3956102624069790" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175914665-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-175914665-1');
+    </script>
+
+   <script data-ad-client="ca-pub-3956102624069790" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>
+

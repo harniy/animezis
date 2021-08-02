@@ -1,0 +1,2 @@
+Host: animezis.com
+Sitemap: https://animezis.com/sitemap.xml

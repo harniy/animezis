@@ -1,0 +1,122 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="user_profile col-md-6 col-lg-4">
+            <div class="user_avatar col-md-2">
+                <img src="{{user.profile.avatar.url}}"  alt="">
+            </div>
+                <div class="user_info col-md-8">
+                    <ul>
+                        <li>
+                            <span style="float: left; padding-right: 10px; color: #707070">Имя:</span>
+                            <div class="user_name" style="font-weight: bold;">
+                                {{ user }}
+                            </div>
+                        </li>
+                        <li>
+                            <span style="float: left; padding-right: 10px; color: #707070">Пароль:</span>
+                            <div class="user_name" style="font-weight: bold;">
+                                **********
+                            </div>
+                            <a href="/accounts/password/change/">
+                                изменить пароль
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form_p">
+                    <div class="avatar_change" style="padding: 5px;"><span>Выберите аватар профиля...</span></div>
+                <form method="POST" action="" enctype="multipart/form-data" class="profile_form">
+                  {% csrf_token %}
+
+                  {{ form.as_p }}
+
+                    <input name="avatar" id="id_avatar" type="file" accept="image/*">
+                  <button type="submit" style="margin-top: 5px;">Сохранить изменения</button>
+                </form>
+
+                </form>
+                    </div>
+
+           </div>
+        </div>
+
+                    <div class="favor_a" style="padding-top: 10px;">
+                        <a href="{% url 'favourite_list' %}" style="padding: 20px; margin-top:5px;">Избранное</a>
+                    </div>
+
+         <div class="favor_a" style="padding-top: 10px;">
+                        <a href="{% url 'like_list' %}" style="padding: 20px; margin-top:5px;">Понравившееся</a>
+                    </div>
+    </div>
+
+
+
+<hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="favor_user_comments"><p style="font-weight:bold; color: black;">Ваши комментарии: </p></div>
+            <hr style="margin-top: 1rem;margin-bottom:1rem;border:0;border-top:1px solid rgba(0,0,0,0.1);">
+            {% if user_comments %}
+{% for comments in user_comments %}
+            <div class="favor_comment" style="padding:1rem 0;border-bottom:1px solid rgba(0,0,0,0.1);">
+
+            <div class="anime_comment_name">
+                <a href="{{comments.post.get_absolute_url}}">
+                <p  style="color: #007bff; font-weight:bold;font-size:15px;text-transform: uppercase;">{{ comments.post|capfirst }}</p>
+                    </a>
+            </div>
+            <div class="anime_comment">
+                                
+                <div class="anime_comment_poster">
+                    <a href="{{comments.post.get_absolute_url}}">
+                        <img src="{{ comments.post.poster.url }}" alt="" style="height: 120px;">
+                    </a>
+                </div>
+
+                 <div class="comment_avatar col-md-2">
+                        <center style="padding-top:0.8rem;">
+                      <img src="{{comments.user.profile.avatar.url }}" class="mr-3 img_com" alt="image"
+                      style="outline: none; cursor: inherit;">
+                        </center>
+                  </div>
+                <div class="anime_favor_comment col-md-8">
+                 <h5 class="mt-0 editContent"
+                                    style="outline: none; cursor: inherit;">{{ comment.user|capfirst }}</h5>
+                                <p class="mt-2 editContent favor_content" style="outline: none; cursor: inherit; word-break: break-all; font-size: 16px">
+                                        {{ comments.content }}
+                                </p>
+
+                    </div>
+            </div>
+
+
+</div>
+
+
+{% endfor %}
+            {% else %}
+            <span style="font-size: 20px; padding:0 5px;"> Вы еще не оставили ни одного комментария!</span>
+            {% endif %}
+    <div class="favor_nav" style="padding: 1rem 0; width: 100%; text-align:center;">
+            {% if user_comments.has_previous %}
+            <a href="{% url 'profile' %}?page={{user_comments.previous_page_number}}" style="padding:0 1rem;">Назад</a>
+            {% endif %}
+            {% if user_comments.has_next %}
+            <a href="{% url 'profile' %}?page={{user_comments.next_page_number}}">Вперед</a>
+            {% endif %}
+    </div>
+                    </div>
+    </div>
+
+
+{% endblock content %}
+
+    {% block footer%}
+        {% include 'include/footer.html' %}
+    {% endblock footer %}

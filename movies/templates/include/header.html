@@ -1,0 +1,91 @@
+{% load movie_tags %}
+<div class="main-banner bg bg1" id="home">
+            <!-- header -->
+            <header class="header">
+                <div class="container-fluid px-lg-5">
+                    <!-- nav -->
+                    <nav class="py-4">
+                        <div id="logo">
+                            <h1> <a href="/" class="" style="outline: none; outline-offset: -2px; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family: &quot;Source Sans Pro&quot;, sans-serif;">Анимезис</a></h1>
+                        </div>
+
+                        <label for="drop" class="toggle">Меню</label>
+                        <input type="checkbox" id="drop">
+                        <ul class="menu mt-2">
+                            <li class="active"><a href="/">Главная</a></li>
+                            <li>
+                                <!-- First Tier Drop Down -->
+                                <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
+                                <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                <input type="checkbox" id="drop-2">
+                                <ul>
+                            {% get_categories %}
+                                 </ul>
+                            </li>
+                            <li>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'profile' %}" style="color: #ff4c4c; font-weight: bold; font-size: 15px;">
+                                <span>{{ user.username }}</span>
+                                    </a>
+                                <a href="{% url 'account_logout' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Выход
+                                </a>
+                                {% else %}
+                                <a href="{% url 'account_login' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Вход
+                                </a>
+                                <a href="{% url 'account_signup' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
+                                    Регистрация
+                                </a>
+                                {% endif %}
+
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- //nav -->
+                </div>
+            </header>
+            <!-- //header -->
+            <!--/banner-->
+            <div class="banner-info">
+
+
+                <div class="ban-buttons">
+
+
+                </div>
+            </div>
+            <!--// banner-inner -->
+<div class="container">
+    <div class="col-lg-12 d-sm-none d-lg-block">
+        <div class="row">
+            
+
+
+            {% get_slider %}
+
+
+        </div>
+    </div>
+ </div>
+
+</div>
+
+
+</div>
+
+
+<ul class="breadcrumb editContent" style="max-height: 45px;">
+            <li class="breadcrumb-item">
+                <a href="/" class="">Главная</a>
+            </li>
+
+
+
+            {% get_random %}
+
+            <li class="dark-theme">
+                  <i class="fa fa-moon-o" aria-hidden="true"></i>
+            </li>
+</ul>
+

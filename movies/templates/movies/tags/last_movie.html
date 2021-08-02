@@ -1,0 +1,21 @@
+<div class="deal-leftmk left-side">
+    <a href="{% url 'last_update' %}" style=" margin:top:10px;">
+        <h3 class="sear-head editContent last_url d-none d-md-none d-lg-block">Последние обновления</h3>
+        <h3 class="sear-head editContent last_url d-lg-none d-md-block" style="margin:auto;">Последние обновления</h3>
+    </a>
+    {% for movie in last_movies %}
+            <div class="special-sec1 row mt-3 editContent d-none d-md-none d-lg-flex ">
+                <div class="img-deals col-12 col-md-4 col-lg-4">
+                    <img src="{{ movie.poster.url }}" class="img-fluid img-resize" alt="">
+
+                </div>
+                    <div class=" col-md-4 edc-text">
+                        <a href="{{ movie.get_absolute_url }}" class="editContent" >
+                            <h6 class="editContent ">{{ movie.title }}</h6>
+                        </a>
+                    </div>
+
+            </div>
+    {% endfor %}
+
+</div>
