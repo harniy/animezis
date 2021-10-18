@@ -58,60 +58,57 @@
 
 
                                 <li style="list-style: none">
-                                        <b>Рейтинг:</b>
-                                        <div class="wpac-rating" data-wpac-chan="{{ movie.id }}" style="width:80%">
 
-                                        </div>
 
-<!--             Рейтинг для фильмов созданный мной. Использовать если рейтинг выше перестанет работать-->
+             <!--Рейтинг для фильмов созданный мной. Использовать если рейтинг выше перестанет работать-->
 
-<!--                                <li style="list-style: none">-->
+                             <li style="list-style: none">
 
-<!--                                    <div class="star_icon">-->
+                                    <div class="star_icon">
 
-<!--                                        {% if request.user.is_authenticated %}-->
-<!--                                        <span><b>Рейтинг: </b><a class="star_a" onclick="myFunction()">-->
-<!--                                            <p class="star fas fa-star"></p>-->
-<!--                                        <span style="font-weight:bold;">{{ movie.get_rating }}</span> / <span style="font-weight:bold;">{{movie.total_rating}}</span>-->
-<!--                                            </a>-->
-<!--                                        {% else %}-->
-<!--                                        <p class="star2 fas fa-star"></p>-->
-<!--                                        {{ movie.get_rating }}-->
-<!--                                        {% endif %}-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                                                    {% if request.user.is_authenticated %}-->
+                                        {% if request.user.is_authenticated %}
+                                       <span><b>Рейтинг: </b><a class="star_a" onclick="myFunction()">
+                                            <p class="star fas fa-star"></p>
+                                       <span style="font-weight:bold;">{{ movie.get_rating }}</span> / <span style="font-weight:bold;">{{movie.total_rating}}</span>
+                                           </a>
+                                       {% else %}
+                                     <p class="star2 fas fa-star"></p>
+                                        {{ movie.get_rating }}
+                                      {% endif %}
+                                    </div>
+                                </li>
+                                                                   {% if request.user.is_authenticated %}
 
-<!--                                    <li style="list-style:none; display: none;" id="rating-form">-->
-<!--                                <form action="{% url 'rating_form' %}" method="POST" class="rating">-->
-<!--                                          {% csrf_token %}-->
-<!--                                     <div class="rating-form" name="rating-form">-->
-<!--                                        <input type="radio" id="star1" class="rate" name="vote" value="10" /><label for="star1" title="Круто"></label>-->
-<!--                                        <input type="radio" id="star2" class="rate" name="vote" value="9" /><label for="star2" title="Отлично"></label>-->
-<!--                                        <input type="radio" id="star3" class="rate" name="vote" value="8" /><label for="star3" title="Очень хорошо"></label>-->
-<!--                                        <input type="radio" id="star4" class="rate" name="vote" value="7" /><label for="star4" title="хорошо"></label>-->
-<!--                                        <input type="radio" id="star5" class="rate" name="vote" value="6" /><label for="star5" title="Средне"></label>-->
-<!--                                        <input type="radio" id="star6" class="rate" name="vote" value="5" /><label for="star6" title="Как то не очень"></label>-->
-<!--                                        <input type="radio" id="star7" class="rate" name="vote" value="4" /><label for="star7" title="Фигня"></label>-->
-<!--                                        <input type="radio" id="star8" class="rate" name="vote" value="3" /><label for="star8" title="Плохо"></label>-->
-<!--                                        <input type="radio" id="star9" class="rate" name="vote" value="2" /><label for="star9" title="Ужас"></label>-->
-<!--                                        <input type="radio" id="star10" class="rate" name="vote" value="1" /><label for="star10" title="Кошмар"></label>-->
+                                    <li style="list-style:none; display: none;" id="rating-form">
+                                <form action="{% url 'rating_form' %}" method="POST" class="rating">
+                                          {% csrf_token %}
+                                     <div class="rating-form" name="rating-form">
+                                        <input type="radio" id="star1" class="rate" name="vote" value="10" /><label for="star1" title="Круто"></label>
+                                        <input type="radio" id="star2" class="rate" name="vote" value="9" /><label for="star2" title="Отлично"></label>
+                                        <input type="radio" id="star3" class="rate" name="vote" value="8" /><label for="star3" title="Очень хорошо"></label>
+                                        <input type="radio" id="star4" class="rate" name="vote" value="7" /><label for="star4" title="хорошо"></label>
+                                        <input type="radio" id="star5" class="rate" name="vote" value="6" /><label for="star5" title="Средне"></label>
+                                        <input type="radio" id="star6" class="rate" name="vote" value="5" /><label for="star6" title="Как то не очень"></label>
+                                        <input type="radio" id="star7" class="rate" name="vote" value="4" /><label for="star7" title="Фигня"></label>
+                                        <input type="radio" id="star8" class="rate" name="vote" value="3" /><label for="star8" title="Плохо"></label>
+                                        <input type="radio" id="star9" class="rate" name="vote" value="2" /><label for="star9" title="Ужас"></label>
+                                        <input type="radio" id="star10" class="rate" name="vote" value="1" /><label for="star10" title="Кошмар"></label>
 
-<!--                                     </div>-->
+                                     </div>
 
-<!--                                          <button name="post_id" value="{{ movie.id }}" class="btn btn-success send_btn rating-button" type="submit">отправить</button>-->
+                                          <button name="post_id" value="{{ movie.id }}" class="btn btn-success send_btn rating-button" type="submit">отправить</button>
 
-<!--                                </form>-->
+                                </form>
 
-<!--                                        <script>-->
-<!--                                        function myFunction() {-->
-<!--                                          document.getElementById("rating-form").style.display = "block";-->
-<!--                                        }-->
-<!--                                        </script>-->
-<!--                                </li>-->
+                                        <script>
+                                        function myFunction() {
+                                          document.getElementById("rating-form").style.display = "block";
+                                        }
+                                        </script>
+                               </li>
 
-<!--                                                            {% else %}-->
-<!--                                                            {% endif %}-->
+                                                           {% else %}
+                                                           {% endif %}
 
 
 
@@ -205,7 +202,10 @@
         data-player="kodik, videocdn, collaps, hdvb, bazon, ustore">
      {% endif %}
     </div>
+
+
 </div>
+
             <script async src="//yohoho.cc/yo.js"></script>
          {% endfor %}
 
