@@ -4,7 +4,7 @@
         <div class="owl-stage" style="min-width: 2000px;">
             {% for slider in slider %}
             <div class="owl-item">
-                <a href="../{{ slider.url }}"><img class="image__own" src="{{slider.poster.url}}" alt="{{slider.title}}">
+                <a href="../{{ slider.url }}"><img class="image__own" loading="lazy" src="{{slider.poster.url}}" alt="{{slider.title}}">
                 <div class="image__overlay image__overlay--blur">
                     <div class="image__description">{{slider.title}}</div>
                 </div></a>
