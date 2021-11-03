@@ -71,7 +71,7 @@ class MoviesView(ListView):
     # queryset = Movie.objects.all()  - вывод всех объектов из Movie
     """Вывод всех записей, кроме тех, что помечены как черновик, в данном случае это поле draft
     оно находится в Models.py class Movie и там поле draft"""
-    queryset = Movie.objects.order_by("-id").filter(draft=False)
+    queryset = Movie.objects.order_by("-time").filter(draft=False)
     template_name = 'movies/movies.html'
     paginate_by = 15
 
